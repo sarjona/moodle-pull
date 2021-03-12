@@ -58,7 +58,8 @@ function generatePullCommand(button) {
             result = `${pullFromRepository} ${pullBranches[version]}`
             break;
         default:
-            result = `git checkout ${branch} && git pull ${pullFromRepository} ${pullBranches[version]}`;
+            // result = `git checkout ${branch} && git pull ${pullFromRepository} ${pullBranches[version]}`;
+            result = `git fetch ${pullFromRepository} ${pullBranches[version]} && git merge --no-ff FETCH_HEAD`;
             break;
     }
     let commandText = $("#git-command");
