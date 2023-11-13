@@ -28,7 +28,7 @@ chrome.runtime.onMessage.addListener(links => {
             for (const i in parts) {
                 if (parts[i].length > 0 && parts[i] !== 'Pull' && parts[i] !== 'Branch:') {
                     version = parts[i].toLowerCase();
-                    if (version !== 'master') {
+                    if (version !== 'master' && version !== 'main') {
                         // Split version number.
                         const verParts = version.split(".");
                         if (verParts[0] >= 4) {
@@ -85,7 +85,8 @@ const generatePullCommand = button => {
             result = `git pull ${pullFromRepository} ${pullBranches[version]}`;
             break;
         default:
-            result = `git checkout ${branch} && git pull ${pullFromRepository} ${pullBranches[version]}`;
+            // result = `git checkout ${branch} && git pull ${pullFromRepository} ${pullBranches[version]}`;
+            result = `git fetch ${pullFromRepository} ${pullBranches[version]} && git merge --no-ff FETCH_HEAD`;
             break;
     }
     navigator.clipboard.writeText(result).then(() => {
