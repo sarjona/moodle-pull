@@ -1,8 +1,8 @@
 const defaultConfig = [
   {
     "type": "pull",
-    "title": "Pull",
-    "command": "git checkout {{BRANCH}} && git pull --no-edit {{PULL_REPOSITORY}} {{PULL_BRANCH}}"
+    "title": "Merge",
+    "command": "git fetch {{PULL_REPOSITORY}} {{PULL_BRANCH}} && git merge --no-ff --no-edit FETCH_HEAD"
   },
   {
     "type": "pull-only",
